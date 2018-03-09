@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SMP Slot Booking</title>
+	<!-- <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"> -->
+	<!-- <script src="/js/jquery-3.2.1.slim.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-inverse bg-dark">
+	<a class="navbar-brand"><img src="../res/images/SMP-logo.png" class="fixed-height"></a>
+</nav>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a id="show_entries">Admin</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="title centered">
+	<h1 class="text-center">Slot Booking</h1>
+</div>
+
+<div class="login card">
+	<div class="card-block">
+		<div class="form-group">
+			<label>First Name</label>
+			<input class="form-control" type="text" name="user_fn_text" id="user_fn_text">
+		</div>
+		<div class="form-group">
+			<label>Last Name</label>
+			<input class="form-control" type="text" name="user_ln_text" id="user_ln_text">
+		</div>
+		<div class="form-group">
+			<label>Entry Number</label>
+			<input class="form-control" type="text" name="id_text" id="id_text">
+		</div>
+		<div class="form-group">
+			<label>Email</label>
+			<input class="form-control" type="text" name="mail_text" id="mail_text">
+		</div>
+		<div class="form-group">
+			<label>Mobile</label>
+			<input class="form-control" type="text" name="mob_text" id="mob_text">
+		</div>
+		<button id="log_btn" class="btn btn-primary">Submit</button>
+	</div>
+</div>
+
+<div class="admin-login card">
+	<div class="card-block">
+		<div class="form-group">
+			<label>Username</label>
+			<input class="form-control" type="text" name="user_text" id="user_text">
+		</div>
+		<div class="form-group">
+			<label>Password</label>
+			<input class="form-control" type="password" name="pass_text" id="pass_text">
+		</div>
+		<button id="adm_log_btn" class="btn btn-primary">Submit</button>
+	</div>
+</div>
+
+<div class="admin card">
+	<div class="card-block">
+		<table id="entries">
+		</table>
+	</div>
+</div>
+
+<div class="slots card">
+	<div class="card-block">
+		<table id="avail-slots">
+		</table>
+	</div>
+</div>
+
+<div class="message card">
+	<div class="card-block message-text">
+	</div>
+</div>
+
+</body>
+</html>

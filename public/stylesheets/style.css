@@ -1,0 +1,101 @@
+.nav-link {
+	color: #f4f5f6 !important;
+}
+
+nav {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important; 
+}
+
+.intro { 
+	color:#fff; 
+	text-decoration: none;
+}
+
+.intro img {
+	/*width: 100%;*/
+}
+
+.fixed-height {
+	height: 40px;
+}
+
+.login, .question{
+	width: 25%;
+	min-width: 300px;
+	margin: auto;
+}
+
+.admin {
+	width: 30%;
+	min-width: 300px;
+	margin: auto;	
+}
+
+.countdown {
+	width: 10%;
+	min-width: 150px;
+	margin: auto;
+	background-color: #999;
+	padding: 5px !important;
+	color: white;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.centered {
+	margin-top: 15vh;
+}
+
+.card {
+	padding: 10px;
+}
+
+body {
+	background-color: #eee;
+}
+
+.leaderboard {
+	position: absolute;
+	right: 0px;
+	width: 25vw;
+	height: 92vh;
+	top: 50px;
+	min-width: 150px;
+	overflow: scroll;
+}
+
+#leader, #leader tr {
+	width: 100%;
+}
+
+#leader tr td {
+	/*width: 50%;*/
+	padding: 5px;
+	color: white;
+}
+
+.td1 {
+	width: 60%;
+	background-color: #f28f3b;
+}
+
+.td2 {
+	width: 40%;
+	background-color: #0b3142;
+	text-align: center;
+}
+
+#que {
+	font-size: 24px;
+}
+
+#question_text {
+	font-size: 18px;
+}
+
+.options {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
