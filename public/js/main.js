@@ -9,7 +9,7 @@ var mob_text;
 
 socket.on('connect', function(){
     // sessionid = socket.id;
-    console.log(sessionid);
+    // console.log(sessionid);
 });
 
 $(document).ready(function(){
@@ -59,11 +59,6 @@ $(document).ready(function(){
                     tr.append(td4);
                     tr.append(td5);
                     tr.append(td6);
-                    // if(slots[i].booked==true){
-                    //     tr.setAttribute("class","booked-slot");
-                    // }else{
-                    //     tr.setAttribute("class","available-slot");
-                    // }
                     $("#entries").append(tr);
                 }
             }else{
@@ -75,17 +70,21 @@ $(document).ready(function(){
     });
     
     $("#log_btn").click(function(){
-        // alert("ayush");
         user_fn_text = $("#user_fn_text").val();
         user_ln_text = $("#user_ln_text").val();
-        id_text = $("#id_text").val();
+        id_text = $("#id_text").val().toUpperCase();
         mail_text = $("#mail_text").val();
-        mob_text = $("mob_text").val();
+        mob_text = $("#mob_text").val();
+        // console.log(user_fn_text);
+        console.log(mob_text);
         var correct = true;
-        correct = correct && /^([a-zA-Z])$/.test(user_fn_text) && /^([a-zA-Z])$/.test(user_ln_text);
-        correct = correct && /^([0-9]{10})$/.test(mob_text);
+        correct = correct && (/([a-zA-Z])$/.test(user_fn_text) && /([a-zA-Z])$/.test(user_ln_text));
+        console.log(correct);
+        correct = correct && (/[0-9]{10}/.test(mob_text));
+        console.log(correct);
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         correct = correct && re.test(mail_text);
+        console.log(correct);
         if(correct){
             $(".login").hide();
             $(".message").hide();

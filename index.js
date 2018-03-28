@@ -7,15 +7,17 @@ var PORT = 8002;
 var bodyParser = require('body-parser');
 var slots=[];
 var available=[];
+var users=[];
 var time=new Date();
 
-const csvFilePath='public/csv/a.csv';
+const csvFilePath='public/csv/slots.csv';
 const csv=require('csvtojson');
 csv()
 .fromFile(csvFilePath)
 .on('json',(jsonObj)=>{
-    // console.log(JSON.stringify(jsonObj));
-    available.push(jsonObj);
+    console.log(JSON.stringify(jsonObj));
+    available.push(jsonObj.time);
+    console.log(available);
 })
 .on('done',(error)=>{
 	// console.log(question);
@@ -55,54 +57,28 @@ app.post('/entries',function(req,res){
 app.post('/user_book',function(req,res){
 	// console.log(JSON.stringify(req.body));
 	if(req.body.pass_text=="admin"){
-		// console.log(req.body.user_text);
-		// console.log(users);
-		// console.log(users.indexOf(req.body.user_text));
-		var user_text = req.body.user_text;
-		// if(users.indexOf(user_text)==-1){
-		if(!users.find(function(e){
-			return e[0]==user_text;
-		})){
-			users.push([user_text,req.body.id]);
-			scores[user_text]={};
-			sockets.push(req.body.id);
-			// console.log(JSON.stringify(scores));
-			res.json({user_auth:true,username:req.body.user_text});
+		var id_text = req.body.entry_no;
+		if(users.indexOf(id_text)==-1){
+			users.push(id_text);
+			var index = available.indexOf(req.body.time); 
+			if(index!=-1){
+				available.splice(index,1);
+				slots.push({time:req.body.time,first_name:req.body.first_name,
+							last_name:req.body.last_name,
+							entry_no:id_text,email:req.body.email,
+							mob:req.body.mob});
+				res.json({available:true});
+			}
+			else{
+				res.json({available:false});
+			}
 		}else{
-			res.json({user_auth:false,username:req.body.user_text});
+			res.json({available:false});
 		}
 	} else {
-		res.json({user_auth:false,username:req.body.user_text});
+		res.json({available:false});
 	}
 });
-
-// app.post('/answer',function(req,res){
-// 	if((new Date)<time){
-// 		username=req.body.username;
-// 		choice=req.body.choice;
-// 		socketid=req.body.id;
-// 		if(sockets.indexOf(socketid)!=-1){
-// 			correct=question[queno].correct;
-// 			// console.log(queno);
-// 			// if(scores[username].has(queno)){
-// 			// 	console.log("Repeat");
-// 			// } else {
-// 			if(choice==correct){
-// 				// console.log("Correct");
-// 				// console.log(scores);
-// 				scores[username][queno]=1;
-// 				console.log(JSON.stringify(scores));
-// 				// console.log(scores[username]);
-// 			}else{
-// 				// console.log("Incorrect");
-// 				scores[username][queno]=0;
-// 				console.log(JSON.stringify(scores));
-// 			}
-// 		}else{
-// 			console.log("Invalid request");
-// 		}
-// 	}
-// });
 
 io.on('connection',function(socket){
 	// console.log("New Client");

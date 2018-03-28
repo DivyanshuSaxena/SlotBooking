@@ -7,6 +7,10 @@ nav {
 	padding-bottom: 0px !important; 
 }
 
+#show_entries {
+	color: #fff;
+}
+
 .intro { 
 	color:#fff; 
 	text-decoration: none;
@@ -20,8 +24,8 @@ nav {
 	height: 40px;
 }
 
-.login, .question{
-	width: 25%;
+.login, .admin-login, .message{
+	width: 40%;
 	min-width: 300px;
 	margin: auto;
 }
@@ -45,7 +49,7 @@ nav {
 }
 
 .centered {
-	margin-top: 15vh;
+	margin-top: 5vh;
 }
 
 .card {
