@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(__dirname + '/public'));
 
-server.listen(PORT);
+server.listen(process.env.PORT || PORT);
 console.log('Listening at : http://localhost:'+PORT);
 
 app.get('/',function (req,res) {
