@@ -147,9 +147,9 @@ $(document).ready(function(){
                     var td = document.createElement("td");
                     td.append(document.createTextNode(slots[i]));
                     tr.append(td);
-                    tr.setAttribute("class","book-slot");
-                    td.setAttribute("id","book-slot-"+i);
-                    td.setAttribute("class","text-center book-slot-d");     
+                    tr.setAttribute("class","book-slot btn btn-primary");
+                    tr.setAttribute("id","book-slot-"+i);
+                    td.setAttribute("class","text-center");     
                     $("#avail-slots").append(tr);
                 }
             });
@@ -160,7 +160,7 @@ $(document).ready(function(){
     });
 
     document.querySelector('body').addEventListener('click', function(event) {
-        if (event.target.tagName.toLowerCase() === 'td') {
+        if (event.target.tagName.toLowerCase() === 'tr') {
             // alert(event.target.id);
             console.log("Received user's choice");
             var time = $(event.target).text();
