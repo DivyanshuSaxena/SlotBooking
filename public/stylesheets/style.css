@@ -2,6 +2,10 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+#show_entries, #user_book {
+	color: #fff;
+}
+
 .intro { 
 	color:#fff; 
 	text-decoration: none;
