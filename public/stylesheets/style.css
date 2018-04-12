@@ -1,14 +1,5 @@
-.nav-link {
-	color: #f4f5f6 !important;
-}
-
-nav {
-	padding-top: 0px !important;
-	padding-bottom: 0px !important; 
-}
-
-#show_entries {
-	color: #fff;
+body {
+	font-family: 'Roboto', sans-serif;
 }
 
 .intro { 
@@ -24,16 +15,45 @@ nav {
 	height: 40px;
 }
 
-.login, .admin-login, .message{
-	width: 40%;
+.login, .admin-login, .message, .slots{
+	width: 30%;
 	min-width: 300px;
 	margin: auto;
 }
 
-.admin {
-	width: 30%;
+.admin{
+	width: 60%;	
 	min-width: 300px;
 	margin: auto;	
+}
+
+#entries td {
+	border: 1px solid black;
+	padding: 2px;
+}
+
+#entries {
+	width: 100%;
+}
+
+.time-slot {
+	width: 10%;
+}
+
+.first-name, .last-name {
+	width: 15%;
+}
+
+.entry-no {
+	width: 15%;
+}
+
+.email-id {
+	width: 30%;
+}
+
+.mobile {
+	width: 15%;
 }
 
 .countdown {
@@ -54,6 +74,9 @@ nav {
 
 .card {
 	padding: 10px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
 }
 
 body {
@@ -102,4 +125,9 @@ body {
 .options {
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+
+.book-slot {
+	width: 40%;
+	margin: 5px 5%;
 }

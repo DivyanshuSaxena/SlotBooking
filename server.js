@@ -38,8 +38,8 @@ app.get('/',function (req,res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/slots',function(req,res){
-	// console.log('requested question');
+app.post('/slots',function(req,res){
+	// console.log('requested slots by user');
 	res.json({slots:available});
 });
 
@@ -56,26 +56,22 @@ app.post('/entries',function(req,res){
 
 app.post('/user_book',function(req,res){
 	// console.log(JSON.stringify(req.body));
-	if(req.body.pass_text=="admin"){
-		var id_text = req.body.entry_no;
-		if(users.indexOf(id_text)==-1){
-			users.push(id_text);
-			var index = available.indexOf(req.body.time); 
-			if(index!=-1){
-				available.splice(index,1);
-				slots.push({time:req.body.time,first_name:req.body.first_name,
-							last_name:req.body.last_name,
-							entry_no:id_text,email:req.body.email,
-							mob:req.body.mob});
-				res.json({available:true});
-			}
-			else{
-				res.json({available:false});
-			}
-		}else{
+	var id_text = req.body.entry_no;
+	if(users.indexOf(id_text)==-1){
+		users.push(id_text);
+		var index = available.indexOf(req.body.time); 
+		if(index!=-1){
+			available.splice(index,1);
+			slots.push({time:req.body.time,first_name:req.body.first_name,
+						last_name:req.body.last_name,
+						entry_no:id_text,email:req.body.email,
+						mob:req.body.mob});
+			res.json({available:true});
+		}
+		else{
 			res.json({available:false});
 		}
-	} else {
+	}else{
 		res.json({available:false});
 	}
 });

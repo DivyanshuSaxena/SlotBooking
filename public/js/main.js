@@ -22,23 +22,64 @@ $(document).ready(function(){
     $("#show_entries").click(function(){
         $(".login").hide();
         $(".admin-login").show();
+        $(".slots").hide();
+        $(".message").hide();
+        $(".admin").hide();
+    });
+    $("#user_book").click(function(){
+        $(".login").show();  
+        $(".admin-login").hide();
+        $(".slots").hide();
+        $(".message").hide();
+        $(".admin").hide(); 
     });
 
     $("#adm_log_btn").click(function(){
         var user_text = $("#user_text").val();
         var password = $("#pass_text").val();
+        console.log("New admin login");
+        $(".slots").hide();
+        $(".message").hide();
+        $(".admin").hide();
         $.ajax({
             type: "POST",
             url: "/entries",
             dataType: "json",
             data:{user_text:user_text,password:password}
         }).done(function(data){
+            console.log("Received registered choices");
             if(data.authentication==true){
                 // Code to display the entries
                 $(".admin-login").hide();
-                $(".message").hide();
                 $(".admin").show();
                 var slots = data.slots;
+                $("#entries tr").remove();
+                var trow = document.createElement("tr");
+                var tdout1 = document.createElement("td");
+                var tdout2 = document.createElement("td");
+                var tdout3 = document.createElement("td");
+                var tdout4 = document.createElement("td");
+                var tdout5 = document.createElement("td");
+                var tdout6 = document.createElement("td");
+                tdout1.setAttribute("class","time-slot font-weight-bold");
+                tdout2.setAttribute("class","first-name font-weight-bold");
+                tdout3.setAttribute("class","last-name font-weight-bold");
+                tdout4.setAttribute("class","entry-no font-weight-bold");
+                tdout5.setAttribute("class","email-id font-weight-bold");
+                tdout6.setAttribute("class","mobile font-weight-bold");
+                tdout1.innerHTML = "Time Slot";
+                tdout2.innerHTML = "First Name";
+                tdout3.innerHTML = "Last Name";
+                tdout4.innerHTML = "Entry No.";
+                tdout5.innerHTML = "Email Id";
+                tdout6.innerHTML = "Contact";
+                trow.append(tdout1);
+                trow.append(tdout2);
+                trow.append(tdout3);
+                trow.append(tdout4);
+                trow.append(tdout5);
+                trow.append(tdout6);
+                $("#entries").append(trow);
                 for(var i=0;i<slots.length;i++){
                     var tr = document.createElement("tr");
                     var td1 = document.createElement("td");
@@ -64,7 +105,7 @@ $(document).ready(function(){
             }else{
                 $(".admin-login").show();
                 $(".message").show();
-                $(".message-text").html("Wrong username or password.Please re-enter.");
+                $(".message-text").html("Wrong username or password. Please re-enter.");
             }
         });
     });
@@ -75,15 +116,15 @@ $(document).ready(function(){
         id_text = $("#id_text").val().toUpperCase();
         mail_text = $("#mail_text").val();
         mob_text = $("#mob_text").val();
-        // console.log(user_fn_text);
-        console.log(mob_text);
         var correct = true;
         correct = correct && (/([a-zA-Z])$/.test(user_fn_text) && /([a-zA-Z])$/.test(user_ln_text));
         console.log(correct);
-        correct = correct && (/[0-9]{10}/.test(mob_text));
+        correct = correct && mob_text.length==10 && (/([0-9]{10})$/.test(mob_text));
         console.log(correct);
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         correct = correct && re.test(mail_text);
+        console.log(correct);
+        correct = correct && id_text.length==11 && (/([0-9]{4}[a-zA-Z]{2}[0-9]{5})$/.test(id_text));
         console.log(correct);
         if(correct){
             $(".login").hide();
@@ -95,15 +136,20 @@ $(document).ready(function(){
                 dataType:"json",
                 data:{}
             }).done(function(data){
-                // alert(JSON.stringify(data));
                 // Code to display the available slots
+                console.log("received slots");
                 var slots = data.slots;
+                console.log(slots);
+                // Remove the current rows
+                $("#avail-slots tr").remove();
                 for (var i = 0; i < slots.length; i++) {
                     var tr = document.createElement("tr");
-                    var td1 = document.createElement("td");
-                    td1.append(document.createTextNode(slots[i].time));
-                    tr.append(td1);
-                    tr.setAttribute("class","book-slot");     
+                    var td = document.createElement("td");
+                    td.append(document.createTextNode(slots[i]));
+                    tr.append(td);
+                    tr.setAttribute("class","book-slot");
+                    td.setAttribute("id","book-slot-"+i);
+                    td.setAttribute("class","text-center book-slot-d");     
                     $("#avail-slots").append(tr);
                 }
             });
@@ -113,23 +159,27 @@ $(document).ready(function(){
         }
     });
 
-    $(".book-slot").click(function(){
-        var time = $(this).innerHTML();
-        $.ajax({
-            type: "POST",
-            url: "/user_book",
-            dataType: "json",
-            data: {time:time,first_name:user_fn_text,last_name:user_ln_text,
-            entry_no:id_text,email:mail_text,mob:mob_text}
-        }).done(function(data){
-            if(data.available==true){
-                $(".message").show();
-                $(".message-text").html("Congrats! Your slot has been booked.");
-            }else{
-                $(".login").show();
-                $(".message").show();
-                $(".message-text").html("This slot could not be booked. Please try again.");
-            }
-        });
+    document.querySelector('body').addEventListener('click', function(event) {
+        if (event.target.tagName.toLowerCase() === 'td') {
+            // alert(event.target.id);
+            console.log("Received user's choice");
+            var time = $(event.target).text();
+            console.log(time);
+            $.ajax({
+                type: "POST",
+                url: "/user_book",
+                dataType: "json",
+                data: {time:time,first_name:user_fn_text,last_name:user_ln_text,
+                entry_no:id_text,email:mail_text,mob:mob_text}
+            }).done(function(data){
+                if(data.available==true){
+                    $(".message").show();
+                    $(".message-text").html("Congrats! Your slot has been booked.");
+                }else{
+                    $(".message").show();
+                    $(".message-text").html("This slot could not be booked. Please try again.");
+                }
+            });
+        }
     });
 });

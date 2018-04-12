@@ -4,30 +4,46 @@
 	<title>SMP Slot Booking</title>
 	<!-- <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"> -->
 	<!-- <script src="/js/jquery-3.2.1.slim.min.js"></script> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="/js/popper.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm navbar-inverse bg-dark">
-	<a class="navbar-brand"><img src="../res/images/SMP-logo.png" class="fixed-height"></a>
-	<ul class="nav navbar-nav">
-      <li><a id="show_entries">Admin</a></li>
-    </ul>
-</nav>
-
-<!-- <nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
-    
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
   </div>
 </nav> -->
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand"><img src="https://smp.iitd.ac.in/res/images/SMP-logo.png" class="fixed-height"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a id="show_entries">Admin</a></li>
+        <li><a id="user_book">User</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 <div class="title centered">
 	<h1 class="text-center">Slot Booking</h1>
@@ -76,6 +92,14 @@
 <div class="admin card">
 	<div class="card-block">
 		<table id="entries">
+			<tr>
+				<td class="time-slot font-weight-bold">Time Slot</td>
+				<td class="first-name font-weight-bold">First Name</td>
+				<td class="last-name font-weight-bold">Last Name</td>
+				<td class="entry-no font-weight-bold">Entry No.</td>
+				<td class="email-id font-weight-bold">Email Id</td>
+				<td class="mobile font-weight-bold">Contact</td>
+			</tr>
 		</table>
 	</div>
 </div>
