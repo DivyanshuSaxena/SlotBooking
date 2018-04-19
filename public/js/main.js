@@ -152,6 +152,10 @@ $(document).ready(function(){
                     td.setAttribute("class","text-center");     
                     $("#avail-slots").append(tr);
                 }
+                if (data.number == 0) {
+                    $(".message").show();
+                    $(".message-text").html("All slots booked for the given day. More slots shall be added soon and notification shall be sent through mail.");
+                }
             });
         }else{
             $(".message").show();

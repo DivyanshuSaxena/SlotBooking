@@ -40,13 +40,13 @@ app.get('/',function (req,res) {
 
 app.post('/slots',function(req,res){
 	// console.log('requested slots by user');
-	res.json({slots:available});
+	res.json({slots:available,number:available.length});
 });
 
 app.post('/entries',function(req,res){
 	// console.log(question.length);
 	// console.log("USERNAME: "+req.body.username + " PASSWORD: "+req.body.password);
-	if(req.body.user_text=="admin" && req.body.password=="admin"){
+	if(req.body.user_text=="admin" && req.body.password=="smpiitd2018"){
 		res.json({authentication:true,slots:slots});
 	}
 	else{
