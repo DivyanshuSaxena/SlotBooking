@@ -1,21 +1,22 @@
 {
-  "name": "quizup",
+  "name": "slotbooking",
   "version": "1.0.0",
-  "description": "Tryst'18",
-  "main": "index.js",
+  "description": "Slot Booking System for SMP, IIT Delhi",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ayush21298/Quizup.git"
+    "url": "git+https://github.com/DivyanshuSaxena/SlotBooking.git"
   },
-  "author": "Ayush21298 (Ayush Patel)",
+  "author": "Divyanshu Saxena",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ayush21298/Quizup/issues"
+    "url": "https://github.com/DivyanshuSaxena/SlotBooking/issues"
   },
-  "homepage": "https://github.com/Ayush21298/Quizup#readme",
+  "homepage": "https://github.com/DivyanshuSaxena/SlotBooking#readme",
   "dependencies": {
     "csvtojson": "^1.1.9",
     "express": "^4.16.2",
