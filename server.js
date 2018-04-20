@@ -58,6 +58,11 @@ app.post('/entries',function(req,res){
 	// console.log(question.length);
 	// console.log("USERNAME: "+req.body.username + " PASSWORD: "+req.body.password);
 	if(req.body.user_text=="admin" && req.body.password=="smpiitd2018"){
+		slots.sort(function(a,b){
+			timearr_a = a['time'].split(":");
+			timearr_b = b['time'].split(":");
+			return ((timearr_a[0] > timearr_b[0]) || (timearr_a[0] === timearr_b[0] && timearr_a[1] > timearr_b[1]));
+		})
 		res.json({authentication:true,slots:slots});
 	}
 	else{
