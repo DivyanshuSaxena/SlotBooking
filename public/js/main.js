@@ -142,17 +142,19 @@ $(document).ready(function(){
                 console.log(slots);
                 // Remove the current rows
                 $("#avail-slots tr").remove();
-                for (var i = 0; i < slots.length; i++) {
-                    var tr = document.createElement("tr");
-                    var td = document.createElement("td");
-                    td.append(document.createTextNode(slots[i]));
-                    tr.append(td);
-                    tr.setAttribute("class","book-slot btn btn-primary");
-                    tr.setAttribute("id","book-slot-"+i);
-                    td.setAttribute("class","text-center");     
-                    $("#avail-slots").append(tr);
+                if (data.number != 0) {
+                    for (var i = 0; i < slots.length; i++) {
+                        var tr = document.createElement("tr");
+                        var td = document.createElement("td");
+                        td.append(document.createTextNode(slots[i]));
+                        tr.append(td);
+                        tr.setAttribute("class","book-slot btn btn-primary");
+                        tr.setAttribute("id","book-slot-"+i);
+                        td.setAttribute("class","text-center");     
+                        $("#avail-slots").append(tr);
+                    }
                 }
-                if (data.number == 0) {
+                else {
                     $(".message").show();
                     $(".message-text").html("All slots booked for the given day. More slots shall be added soon and notification shall be sent through mail.");
                 }
