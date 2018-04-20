@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+const Json2csvParser = require('json2csv').Parser;
 var fs = require('fs');
 var PORT = 8002;
 var bodyParser = require('body-parser');
@@ -11,6 +12,7 @@ var users=[];
 var time=new Date();
 
 const csvFilePath='public/csv/slots.csv';
+const dataFilePath='public/csv/entries.csv';
 const csv=require('csvtojson');
 csv()
 .fromFile(csvFilePath)
@@ -20,7 +22,6 @@ csv()
     console.log(available);
 })
 .on('done',(error)=>{
-	// console.log(question);
     // console.log('end');
 });
 
@@ -54,13 +55,32 @@ app.post('/entries',function(req,res){
 	}
 });
 
+app.post('/getxls',function(req,res){
+	const fields = ['Time Slot', 'First Name', 'Last Name', 'Entry No.', 'Email Id', 'Contact'];
+	const opts = { fields };
+	
+	try {
+		const parser = new Json2csvParser(opts);
+		const csv = parser.parse(myData);
+		console.log(csv);
+		fs.writeFile(dataFilePath, lyrics, (err) => {  
+			// throws an error, you could also catch it here
+			if (err) throw err;
+			console.log('Written!');
+		});		
+	} catch (err) {
+		console.error(err);
+	}
+})
+
 app.post('/user_book',function(req,res){
 	// console.log(JSON.stringify(req.body));
 	var id_text = req.body.entry_no;
 	if(users.indexOf(id_text)==-1){
-		users.push(id_text);
 		var index = available.indexOf(req.body.time); 
 		if(index!=-1){
+			users.push(id_text);
+			console.log(users);
 			available.splice(index,1);
 			slots.push({time:req.body.time,first_name:req.body.first_name,
 						last_name:req.body.last_name,

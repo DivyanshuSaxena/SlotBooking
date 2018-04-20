@@ -176,12 +176,14 @@ $(document).ready(function(){
                 data: {time:time,first_name:user_fn_text,last_name:user_ln_text,
                 entry_no:id_text,email:mail_text,mob:mob_text}
             }).done(function(data){
+                console.log(data.available);
                 if(data.available==true){
+                    $('.slots').hide();
                     $(".message").show();
-                    $(".message-text").html("Congrats! Your slot has been booked.");
+                    $(".message-text").html("Your slot choice has been received. You shall receive a mail if your slot is confirmed.");
                 }else{
                     $(".message").show();
-                    $(".message-text").html("This slot could not be booked. Please try again.");
+                    $(".message-text").html("This slot could not be booked. Please try another slot.");
                 }
             });
         }
