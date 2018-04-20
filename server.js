@@ -8,8 +8,17 @@ var PORT = 8002;
 var bodyParser = require('body-parser');
 var slots=[];
 var available=[];
+var panels=[];
 var users=[];
 var time=new Date();
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'info.bsw.iitdelhi@gmail.com',
+    pass: 'Bsw@april2017'
+  }
+});
 
 const csvFilePath='public/csv/slots.csv';
 const dataFilePath='public/csv/entries.csv';
@@ -18,7 +27,8 @@ csv()
 .fromFile(csvFilePath)
 .on('json',(jsonObj)=>{
     console.log(JSON.stringify(jsonObj));
-    available.push(jsonObj.time);
+	available.push(jsonObj.time);
+	panels.push(jsonObj.panels);
     console.log(available);
 })
 .on('done',(error)=>{
@@ -81,11 +91,28 @@ app.post('/user_book',function(req,res){
 		if(index!=-1){
 			users.push(id_text);
 			console.log(users);
-			available.splice(index,1);
+			panels[index]--;
+			if (panels[index]==0) {
+				available.splice(index,1);
+			}
 			slots.push({time:req.body.time,first_name:req.body.first_name,
 						last_name:req.body.last_name,
 						entry_no:id_text,email:req.body.email,
-						mob:req.body.mob});
+						mob:req.body.mob,panel:(panels[index]+1)});
+			// Send Mail
+			var mailOptions = {
+				from: 'dssaxena2011@gmail.com',
+				to: req.body.email,
+				subject: 'Slot Confirmation SMP',
+				text: 'Your slot has been booked for '+req.body.time+' hrs on 21st April. The interview shall be held in Student Lounge.'
+			};
+			transporter.sendMail(mailOptions, function(error, info){
+				if (error) {
+					console.log(error);
+				} else {
+					console.log('Email sent: ' + info.response);
+				}
+			}); 
 			res.json({available:true});
 		}
 		else{

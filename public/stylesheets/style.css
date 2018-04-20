@@ -31,12 +31,12 @@ body {
 	margin: auto;	
 }
 
-#entries td {
+#entries1 td, #entries2 td, #entries3 td, .entries td {
 	border: 1px solid black;
 	padding: 2px;
 }
 
-#entries, #avail-slots {
+#entries1, #entries2, #entries3, .entries, #avail-slots {
 	width: 100%;
 }
 

@@ -53,33 +53,11 @@ $(document).ready(function(){
                 $(".admin-login").hide();
                 $(".admin").show();
                 var slots = data.slots;
-                $("#entries tr").remove();
-                var trow = document.createElement("tr");
-                var tdout1 = document.createElement("td");
-                var tdout2 = document.createElement("td");
-                var tdout3 = document.createElement("td");
-                var tdout4 = document.createElement("td");
-                var tdout5 = document.createElement("td");
-                var tdout6 = document.createElement("td");
-                tdout1.setAttribute("class","time-slot font-weight-bold");
-                tdout2.setAttribute("class","first-name font-weight-bold");
-                tdout3.setAttribute("class","last-name font-weight-bold");
-                tdout4.setAttribute("class","entry-no font-weight-bold");
-                tdout5.setAttribute("class","email-id font-weight-bold");
-                tdout6.setAttribute("class","mobile font-weight-bold");
-                tdout1.innerHTML = "Time Slot";
-                tdout2.innerHTML = "First Name";
-                tdout3.innerHTML = "Last Name";
-                tdout4.innerHTML = "Entry No.";
-                tdout5.innerHTML = "Email Id";
-                tdout6.innerHTML = "Contact";
-                trow.append(tdout1);
-                trow.append(tdout2);
-                trow.append(tdout3);
-                trow.append(tdout4);
-                trow.append(tdout5);
-                trow.append(tdout6);
-                $("#entries").append(trow);
+                $("#entries1 tr").remove();
+                $("#entries2 tr").remove();
+                $("#entries3 tr").remove();
+    
+                // $("#entries1").append(trow);
                 for(var i=0;i<slots.length;i++){
                     var tr = document.createElement("tr");
                     var td1 = document.createElement("td");
@@ -94,13 +72,27 @@ $(document).ready(function(){
                     td4.append(document.createTextNode(slots[i].entry_no));
                     td5.append(document.createTextNode(slots[i].email));
                     td6.append(document.createTextNode(slots[i].mob));
+                    td1.setAttribute("class","time-slot");
+                    td2.setAttribute("class","first-name");
+                    td3.setAttribute("class","last-name");
+                    td4.setAttribute("class","entry-no");
+                    td5.setAttribute("class","email-id");
+                    td6.setAttribute("class","mobile");
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
                     tr.append(td4);
                     tr.append(td5);
                     tr.append(td6);
-                    $("#entries").append(tr);
+                    if (slots[i].panel==1){
+                        $("#entries1").append(tr);
+                    }
+                    else if (slots[i].panel==2){
+                        $("#entries2").append(tr);
+                    }
+                    else{
+                        $("#entries3").append(tr);
+                    }
                 }
             }else{
                 $(".admin-login").show();
