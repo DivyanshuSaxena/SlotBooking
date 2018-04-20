@@ -100,11 +100,18 @@ app.post('/user_book',function(req,res){
 						entry_no:id_text,email:req.body.email,
 						mob:req.body.mob,panel:(panels[index]+1)});
 			// Send Mail
+			timearr = req.body.time.split(":");
+			console.log(timearr);
+			var datestr;
+			if (timearr[0]<2)
+				datestr = "22 April, 2018";
+			else
+				datestr = "21 April, 2018";		
 			var mailOptions = {
-				from: 'dssaxena2011@gmail.com',
+				from: 'info.bsw.iitdelhi@gmail.com',
 				to: req.body.email,
 				subject: 'Slot Confirmation SMP',
-				text: 'Your slot has been booked for '+req.body.time+' hrs on 21st April. The interview shall be held in Student Lounge.'
+				text: 'Your slot has been booked for '+req.body.time+' hrs on '+datestr+'. The interview shall be held in Student Lounge.'
 			};
 			transporter.sendMail(mailOptions, function(error, info){
 				if (error) {
