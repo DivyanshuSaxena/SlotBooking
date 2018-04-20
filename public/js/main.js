@@ -6,6 +6,7 @@ var user_ln_text;
 var mail_text;
 var id_text;
 var mob_text;
+var is_user=false;
 
 socket.on('connect', function(){
     // sessionid = socket.id;
@@ -20,6 +21,7 @@ $(document).ready(function(){
     $(".slots").hide();
     $(".message").hide();
     $("#show_entries").click(function(){
+        is_user = false;
         $(".login").hide();
         $(".admin-login").show();
         $(".slots").hide();
@@ -27,6 +29,7 @@ $(document).ready(function(){
         $(".admin").hide();
     });
     $("#user_book").click(function(){
+        is_user = false;
         $(".login").show();  
         $(".admin-login").hide();
         $(".slots").hide();
@@ -35,6 +38,7 @@ $(document).ready(function(){
     });
 
     $("#adm_log_btn").click(function(){
+        is_user = false;
         var user_text = $("#user_text").val();
         var password = $("#pass_text").val();
         console.log("New admin login");
@@ -134,6 +138,7 @@ $(document).ready(function(){
                 console.log(slots);
                 // Remove the current rows
                 $("#avail-slots tr").remove();
+                is_user = true;
                 if (data.number != 0) {
                     for (var i = 0; i < slots.length; i++) {
                         var tr = document.createElement("tr");
@@ -158,7 +163,7 @@ $(document).ready(function(){
     });
 
     document.querySelector('body').addEventListener('click', function(event) {
-        if (event.target.tagName.toLowerCase() === 'tr') {
+        if(is_user && (event.target.tagName.toLowerCase() === 'tr' || event.target.tagName.toLowerCase() === "td") ){
             // alert(event.target.id);
             console.log("Received user's choice");
             var time = $(event.target).text();
