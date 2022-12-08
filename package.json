@@ -19,7 +19,7 @@
   "homepage": "https://github.com/DivyanshuSaxena/SlotBooking#readme",
   "dependencies": {
     "csvtojson": "^1.1.9",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "json2csv": "^4.1.2",
     "nodemailer": "^6.4.16",
     "socket.io": "^2.4.0"
